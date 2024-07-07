@@ -21,6 +21,10 @@ reearth.on('message', () => {
   addTrafficLayer(dailyData);
 });
 
+/**
+ * 直近24時間の検知結果を取得します
+ * @returns {JSON} 直近24時間の検知結果
+ */
 const getDailyData = () => {
   // TODO: APIを叩く
   /*   const url = '/api/{UUID}/data/daily';
@@ -85,6 +89,10 @@ const getDailyData = () => {
   return trafficData;
 };
 
+/**
+ * 交通の検知結果を地図上に表示します
+ * @param {JSON} trafficData
+ */
 const addTrafficLayer = (trafficData) => {
   trafficData.forEach((item) => {
     const timestamp = item.timestamp;
@@ -120,6 +128,13 @@ const addTrafficLayer = (trafficData) => {
   });
 };
 
+/**
+ * 交通の検知結果を1件ずつ地図に表示します
+ * @param {string} timestamp
+ * @param {string} objType
+ * @param {string} location
+ * @param {string} iconUrl
+ */
 const addTrufficFeature = (timestamp, objType, location, iconUrl) => {
   reearth.layers.add({
     extensionId: 'marker',
