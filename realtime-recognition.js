@@ -91,7 +91,7 @@ const getDailyData = () => {
 
 /**
  * 交通の検知結果を地図上に表示します
- * @param {JSON} trafficData
+ * @param {JSON} trafficData 交通の検知結果
  */
 const addTrafficLayer = (trafficData) => {
   trafficData.forEach((item) => {
@@ -130,10 +130,10 @@ const addTrafficLayer = (trafficData) => {
 
 /**
  * 交通の検知結果を1件ずつ地図に表示します
- * @param {string} timestamp
- * @param {string} objType
- * @param {string} location
- * @param {string} iconUrl
+ * @param {string} timestamp 時刻
+ * @param {string} objType タイプ
+ * @param {string} location 座標
+ * @param {string} iconUrl アイコンのURL
  */
 const addTrufficFeature = (timestamp, objType, location, iconUrl) => {
   reearth.layers.add({
