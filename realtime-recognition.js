@@ -163,11 +163,6 @@ const addTrufficFeature = (timestamp, objType, location, iconUrl) => {
         style: 'image',
         image: iconUrl,
         label: false,
-        labelBackground: true,
-        labelPosition: 'top',
-        labelTypography: {
-          fontSize: 20,
-        },
       },
     },
     infobox: {
