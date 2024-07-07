@@ -172,7 +172,8 @@ const addTrufficFeature = (timestamp, objType, location, iconUrl) => {
           pluginId: 'reearth',
           property: {
             default: {
-              text: 'timestamp: ' + timestamp,
+              title: 'Date',
+              text: timestamp,
             },
           },
         },
@@ -181,7 +182,8 @@ const addTrufficFeature = (timestamp, objType, location, iconUrl) => {
           pluginId: 'reearth',
           property: {
             default: {
-              text: 'location: ' + location.latitude + ', ' + location.longitude,
+              title: 'Location',
+              text: location.latitude + ', ' + location.longitude,
             },
           },
         },
@@ -190,7 +192,8 @@ const addTrufficFeature = (timestamp, objType, location, iconUrl) => {
           pluginId: 'reearth',
           property: {
             default: {
-              text: 'Type: ' + objType,
+              title: 'Type',
+              text: objType,
             },
           },
         },
