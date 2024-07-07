@@ -3,10 +3,24 @@ const html = `
     html,body {
       margin: 0;
     }
+    #btn-daily-traffic{
+      margin:auto;
+      width:100%;
+      color:#fff;
+      background: #00BEBE;
+      border:1px solid #01ABAB;
+      height:32px;
+      box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.043);
+      border-radius: 2px;
+    }
+    #btn-daily-traffic:hover{
+      cursor: pointer;
+    }
+    
   </style>
-  <button id="send">データ取得</button>
+  <button id="btn-daily-traffic">直近24時間データ表示</button>
   <script>
-    document.getElementById("send").addEventListener("click", function() {
+    document.getElementById("btn-daily-traffic").addEventListener("click", function() {
       parent.postMessage("Button is clicked", "*");
     });
   </script>
