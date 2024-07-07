@@ -9,21 +9,17 @@ const html = `
     document.getElementById("send").addEventListener("click", function() {
       parent.postMessage("Button is clicked", "*");
     });
-     window.addEventListener("message", function (e) {
-      if (e.source !== parent) return;
-      document.getElementById("msg").textContent = e.data;
-    });
   </script>
 `;
 
+// button表示
 reearth.ui.show(html);
-reearth.on('message', (msg) => {
-  console.log('message received:', msg);
-  dailyData = getDailyData();
-  addMarkers(dailyData);
-});
 
-reearth.ui.postMessage('add marker');
+// buttonが押された後の処理
+reearth.on('message', () => {
+  dailyData = getDailyData();
+  addTrafficLayer(dailyData);
+});
 
 const getDailyData = () => {
   // TODO: APIを叩く
@@ -43,7 +39,8 @@ const getDailyData = () => {
       console.error('There was a problem with the fetch operation:', error);
     }); */
   // ファイル名 recognition.json
-  const data = [
+  // JSONデータ（API連携後に消す）
+  const trafficData = [
     {
       obj_type: 'car', //car,bus,track,bycecle,peopleのいずれかが入る
       timestamp: '2023-07-05T12:34:56Z', //ISO 8601型式
@@ -85,12 +82,11 @@ const getDailyData = () => {
       },
     },
   ];
-  console.log(JSON.stringify(data));
-  return data;
+  return trafficData;
 };
 
-const addMarkers = (data) => {
-  data.forEach((item) => {
+const addTrafficLayer = (trafficData) => {
+  trafficData.forEach((item) => {
     const timestamp = item.timestamp;
     const objType = item.obj_type;
     const location = item.location;
@@ -120,11 +116,11 @@ const addMarkers = (data) => {
         break;
     }
 
-    addMarker(timestamp, objType, location, iconUrl);
+    addTrufficFeature(timestamp, objType, location, iconUrl);
   });
 };
 
-const addMarker = (timestamp, objType, location, iconUrl) => {
+const addTrufficFeature = (timestamp, objType, location, iconUrl) => {
   reearth.layers.add({
     extensionId: 'marker',
     isVisible: true,
