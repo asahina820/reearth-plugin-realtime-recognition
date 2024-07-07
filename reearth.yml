@@ -1,0 +1,7 @@
+id: realtime-recognition
+name: リアルタイム認識プラグイン
+version: 1.0.0
+extensions:
+  - id: realtime-recognition
+    type: widget
+    name: リアルタイム認識ウィジェット
