@@ -60,6 +60,30 @@ const getDailyData = () => {
         longitude: 139.7917, //検知した自動車の経度
       },
     },
+    {
+      obj_type: 'bicycle', //car,bus,track,bycecle,peopleのいずれかが入る
+      timestamp: '2023-07-05T12:34:56Z', //ISO 8601型式
+      location: {
+        latitude: 35.8005, //検知した自動車の緯度
+        longitude: 139.7877, //検知した自動車の経度
+      },
+    },
+    {
+      obj_type: 'bus', //car,bus,track,bycecle,peopleのいずれかが入る
+      timestamp: '2023-07-05T12:34:56Z', //ISO 8601型式
+      location: {
+        latitude: 35.7755, //検知した自動車の緯度
+        longitude: 139.7567, //検知した自動車の経度
+      },
+    },
+    {
+      obj_type: 'people', //car,bus,track,bycecle,peopleのいずれかが入る
+      timestamp: '2023-07-05T12:34:56Z', //ISO 8601型式
+      location: {
+        latitude: 35.7855, //検知した自動車の緯度
+        longitude: 139.7967, //検知した自動車の経度
+      },
+    },
   ];
   console.log(JSON.stringify(data));
   return data;
@@ -70,11 +94,37 @@ const addMarkers = (data) => {
     const timestamp = item.timestamp;
     const objType = item.obj_type;
     const location = item.location;
-    addMarker(timestamp, objType, location);
+
+    // objTypeごとにアイコン画像を設定
+    // NOTE: アイコンを使用する際には出典を明記する必要あり
+    // https://icons8.jp/license
+    let iconUrl;
+    switch (objType) {
+      case 'car':
+        iconUrl = 'https://img.icons8.com/ios-glyphs/30/car--v1.png';
+        break;
+      case 'bus':
+        iconUrl = 'https://img.icons8.com/ios-glyphs/30/bus.png';
+        break;
+      case 'truck':
+        iconUrl = 'https://img.icons8.com/ios-glyphs/30/truck.png';
+        break;
+      case 'bicycle':
+        iconUrl = 'https://img.icons8.com/ios-glyphs/30/bicycle.png';
+        break;
+      case 'people':
+        iconUrl = 'https://img.icons8.com/ios-glyphs/30/walking--v1.png';
+        break;
+      default:
+        iconUrl = null;
+        break;
+    }
+
+    addMarker(timestamp, objType, location, iconUrl);
   });
 };
 
-const addMarker = (timestamp, objType, location) => {
+const addMarker = (timestamp, objType, location, iconUrl) => {
   reearth.layers.add({
     extensionId: 'marker',
     isVisible: true,
@@ -86,7 +136,7 @@ const addMarker = (timestamp, objType, location) => {
           lng: location.longitude,
         },
         style: 'image',
-        image: 'https://static.reearth.io/assets/01genrxymmkfyncgh787whb1dy.png',
+        image: iconUrl,
         label: false,
         labelBackground: true,
         labelPosition: 'top',
